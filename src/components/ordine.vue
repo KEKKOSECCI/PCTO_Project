@@ -129,4 +129,9 @@ export default {
 .view {
     display: block;
 }
+@media (max-width: 768px) {
+    .custom-select{
+        display:none;
+    }
+}
 </style>

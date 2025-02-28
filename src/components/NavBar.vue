@@ -60,12 +60,20 @@ export default {
 
 #logo {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1vh;
     opacity: 1 !important;
 }
 
 a {
     text-decoration: none;
     font-weight: bold;
+}
+@media (max-width: 768px) {
+    #nav a {
+
+    margin-right: 5px;
+    font-size:2.2vh
+
+}
 }
 </style>

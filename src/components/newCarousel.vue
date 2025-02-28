@@ -1,19 +1,18 @@
 <template>
     <h2 v-if="controlloGenere">{{ genere.name }}</h2>
-    
+
     <!-- Applichiamo v-lazy per caricare il carousel solo quando visibile -->
-    <swiper 
-        v-if="controlloGenere" 
-        :slidesPerView="5" 
-        :spaceBetween="10" 
-        :loop="shouldLoop" 
-        :navigation="true" 
-        :modules="modules" 
-        class="mySwiper" 
-        id="swiper">
-        
+    <swiper v-if="controlloGenere" :slidesPerView="5" :spaceBetween="10" :loop="shouldLoop" :navigation="true"
+        :modules="modules" :breakpoints="{
+            320: { slidesPerView: 1, spaceBetween: 10 },  // Smartphone
+            640: { slidesPerView: 2, spaceBetween: 15 },  // Tablet
+            1024: { slidesPerView: 3, spaceBetween: 20 }, // Desktop
+            1440: { slidesPerView: 5, spaceBetween: 10 }, // Schermi grandi
+        }" class="mySwiper" id="swiper">
+
         <swiper-slide v-for="(element, index) in shuffledArray" :key="index">
-            <AppLink :to="{ name: 'details.show', params: { id: element.id, slug: element.title || element.name, type: type } }">
+            <AppLink
+                :to="{ name: 'details.show', params: { id: element.id, slug: element.title || element.name, type: type } }">
                 <Card :oggetto="element" />
             </AppLink>
         </swiper-slide>
@@ -50,13 +49,13 @@ export default {
     },
     computed: {
         genere() {
-            return this.type === 'movie' 
-                ? dataStore.generiFilm.find(genere => genere.id === this.idGenere) 
+            return this.type === 'movie'
+                ? dataStore.generiFilm.find(genere => genere.id === this.idGenere)
                 : dataStore.generiSerie.find(genere => genere.id === this.idGenere);
         },
         arrayGiusto() {
-            return this.type === 'movie' 
-                ? dataStore.dataFilm.filter(film => film.genre_ids.includes(this.idGenere)) 
+            return this.type === 'movie'
+                ? dataStore.dataFilm.filter(film => film.genre_ids.includes(this.idGenere))
                 : dataStore.dataSerie.filter(serie => serie.genre_ids.includes(this.idGenere));
         },
         shuffledArray() {

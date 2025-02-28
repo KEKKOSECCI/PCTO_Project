@@ -1,6 +1,7 @@
 <template>
     <SideBar />
     <Ordine/>
+    <div id="blocco"></div>
     <div class="box">
         <!-- Grid di card -->
         <CardCatalogo v-for="(element, index) in array" :key="element.id" :oggetto="element" :type="type" />
@@ -90,6 +91,7 @@ export default {
 </script>
 
 <style scoped>
+#blocco{display:none}
 .box {
     display: grid;
     width: 85%;
@@ -105,5 +107,25 @@ export default {
     text-align: center;
     padding: 10px;
     color: #999;
+}
+@media (max-width: 768px) {
+  .box{
+    margin-left:0;
+    grid-template-columns: repeat(3, 0fr);
+    width:99%;
+    margin-left:auto;
+
+    margin-top:30%;
+    align-items: center;
+    overflow:hidden;
+  }
+  #blocco{
+    display:block;
+    position:fixed;
+    width:100%;
+    height:16%;
+    background-color: #1A1C28;
+    z-index: 4;
+  }
 }
 </style>

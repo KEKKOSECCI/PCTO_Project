@@ -35,11 +35,22 @@ console.log(dataStore)
 #homeTitolo{
     position:relative;
     top:5%;
+    padding: 0;
+    font-size: 5vw; /* La dimensione varia in base alla larghezza dello schermo */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media (max-width: 768px) {
   .swiper-slide {
     width: 90% !important; /* Occupa quasi tutta la larghezza dello schermo */
   }
+}
+#logos{
+    width:1.5%;
+    position:fixed;
+    left:58%;
+    top:2.8%;
 }
 
 @media (max-width: 480px) {
@@ -47,10 +58,19 @@ console.log(dataStore)
     width: 100% !important;
     
   }
-  ImgFilmSerie{
-    position:relative;
-    top:100%;
+  #homeTitolo{
+    top:30% !important;
+    font-size:10vw;
+  }
+}
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 100% !important;
     
+  }
+  #homeTitolo{
+    top:30% !important;
+    font-size:10vw;
   }
 }
 </style>

@@ -74,4 +74,17 @@ input[type="checkbox"]:checked+.slider::before {
     transform: translateX(26px);
     background-image: url('/public/images/images.png');
 }
+@media (max-width: 768px) {
+  label{
+    top:4.5%;
+    right:4px;
+  }
+  .slider{
+    width:40px;
+  }
+  input[type="checkbox"]:checked+.slider::before {
+    transform: translateX(15px);
+
+}
+}
 </style>

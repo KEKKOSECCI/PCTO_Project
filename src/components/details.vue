@@ -1,8 +1,8 @@
 <template>
-    <img id="posterB" :src="srcGiustoBack" alt="poster">
+    <img id="posterB" :src="isMobile ? srcGiusto : srcGiustoBack" alt="poster">
     <div id="box">
         <div id="overlay"></div>
-        <img id="poster" :src="srcGiusto" alt="poster">
+        <img id="poster" :src="isMobile ? srcGiustoBack : srcGiusto" alt="poster">
         <div id="scritte">
             <h1 id="detailsTitle">
                 <span v-if="oggetto && oggetto.title">{{ oggetto.title }}</span>
@@ -23,10 +23,17 @@ export default {
     components: { Raiting },
     props: {
         id: { type: Number, required: true },
-        type: { type: String, required: true } // ✅ Corretta sintassi
+        type: { type: String, required: true }
     },
     setup(props) {
         const oggetto = ref(null);
+        const isMobile = ref(window.innerWidth <= 768);
+
+        const updateIsMobile = () => {
+            isMobile.value = window.innerWidth <= 768;
+        };
+
+        window.addEventListener('resize', updateIsMobile);
 
         const srcGiusto = computed(() => {
             return oggetto.value?.poster_path 
@@ -46,23 +53,20 @@ export default {
                 : 0;
         });
 
-        // Usa onMounted con async/await per ottenere i dettagli
         onMounted(async () => {
             try {
-                console.log(`Fetching details for ${props.type} with ID: ${props.id}`);
-                /* oggetto.value = await dataStore.idDettagli(props.type, props.id); */
                 oggetto.value = await dataStore.idDettagli(props.type, props.id);
-                console.log("Dati ricevuti:", oggetto.value);
             } catch (error) {
                 console.error("Errore nel recupero dei dati:", error);
             }
         });
-        
+
         return {
             oggetto,
             votoFormattato,
             srcGiustoBack,
-            srcGiusto
+            srcGiusto,
+            isMobile
         };
     }
 };
@@ -76,16 +80,17 @@ export default {
     overflow: hidden;
 }
 
-/* Immagine di sfondo che copre tutto il div */
-#background {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* Poster di sfondo */
+#posterB {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2;
-    /* Dietro tutto */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-radius:0;
 }
 
 /* Overlay scuro sopra lo sfondo */
@@ -97,10 +102,10 @@ export default {
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
     z-index: 2;
-    /* Sopra lo sfondo, sotto il contenuto */
+    border-radius:0;
 }
 
-/* Immagine del poster */
+/* Poster principale */
 #poster {
     width: 20%;
     height: auto;
@@ -109,18 +114,6 @@ export default {
     top: 20%;
     left: 25%;
     z-index: 3;
-}
-
-/* Immagine del poster */
-#posterB {
-    width: 100%;
-    height: 100%;
-    height: auto;
-    display: block;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    z-index: 1;
 }
 
 /* Sezione scritte */
@@ -142,5 +135,46 @@ export default {
     position: absolute;
     bottom: 0;
     left: 45%;
+}
+
+/* 📱 Stile per mobile */
+@media (max-width: 768px) {
+    #poster {
+        width: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        z-index:0;
+        border-radius:0;
+    }
+
+    #posterB {
+        width: 40%;
+        height: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10%;
+        display:none;
+    }
+
+    #scritte {
+        top: 20%;
+        left: 5%;
+        width: 90%;
+        text-align: center;
+    }
+
+    #detailsOverview {
+        font-size: 1.5vh;
+        max-width:100%;
+       height:60%;
+    }
+
+    #detailsRaiting {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 </style>

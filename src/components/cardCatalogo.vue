@@ -53,4 +53,18 @@ export default {
   font-size: 2vh;
   color: white;
 }
+@media (max-width: 480px) {
+  #immagine{
+    width:100%;
+    border-radius: 10px !important;
+  }
+  .carte{
+    width:100%;
+  }
+  #titolo{
+    font-size:1.5vh;
+    padding:0;
+    margin:0;
+  }
+}
 </style>

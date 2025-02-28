@@ -7,63 +7,51 @@
             @input="handleInput"
             :placeholder="placeHolder"
         >
-
-
     </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import dataStore from '../data/data';
-import lingua from '../lingua.json'
-
+import lingua from '../lingua.json';
 
 export default {
   name: 'SearchBox',
-  computed:{
-    placeHolder(){
-        if(dataStore.lingua == "it-IT")
-        return lingua.languages[1].ricerca
-        return lingua.languages[0].ricerca
-         
-    }
-  },
-
-  
   setup() {
-    // Imposta la variabile `query` con ref
     const query = ref('');
     const router = useRouter();
+    const route = useRoute();
 
-    // Funzione che gestisce l'input
+    const placeHolder = computed(() => {
+      return dataStore.lingua === "it-IT" ? lingua.languages[1].ricerca : lingua.languages[0].ricerca;
+    });
+
     const handleInput = () => {
       if (query.value.length >= 3) {
-        // Quando la lunghezza della query supera i 2 caratteri, navighiamo alla rotta
-        // ma passiamo la query come parametro
         router.push({ name: 'search.show' });
         dataStore.search = query.value;
       }
     };
-    const forceSearch = () =>{
-      dataStore.search = query.value;
-      handleSearch();
 
-    }
-    // Funzione che gestisce il click del bottone
     const handleSearch = () => {
       if (query.value.trim()) {
-        // Naviga a search.show con la query come parametro
         router.push({ name: 'search.show', query: { query: query.value } });
       }
     };
 
-    // Restituisce le variabili e le funzioni che devono essere accessibili nel template
+    const forceSearch = () => {
+      dataStore.search = query.value;
+      handleSearch();
+    };
+
+
     return {
       query,
       handleInput,
       handleSearch,
-      forceSearch
+      forceSearch,
+      placeHolder
     };
   }
 };
@@ -107,5 +95,13 @@ export default {
 
 .search-btn:hover {
     background: #012927;
+}
+@media (max-width: 480px) {
+  .search-box{
+    top:10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
 }
 </style>

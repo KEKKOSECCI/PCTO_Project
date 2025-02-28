@@ -117,7 +117,7 @@ img {
     visibility: visible;
     z-index: 2;
     transition: opacity 0.4s ease, transform 0.4s ease;
-
+    
 }
 
 .card:hover #overview {
@@ -147,4 +147,15 @@ p {
     z-index: 1;
 } 
 
+@media (max-width: 480px) {
+  #immagine{
+    width:118px;
+    border-radius: 10px !important;
+  }
+  #titolo{
+    font-size:1.5vh;
+    padding:0;
+    margin:0;
+  }
+}
 </style>

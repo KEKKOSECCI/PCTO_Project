@@ -94,12 +94,12 @@ export default {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .swiper-slide {
     width: 100% !important;
   }
   #all{
-    top:40% !important;
+    top:30% !important;
   }
 }
 </style>
