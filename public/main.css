@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Montserrat:wght@500&family=Sigmar&family=Sriracha&display=swap');
+
+body {
+  justify-content: center;
+  /* Centra orizzontalmente */
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  background-color:#1A1C28;
+}
+.font-titolo{
+  font-family: "Sigmar", serif;
+  font-weight: 200;
+  font-style: normal;
+}

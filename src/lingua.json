@@ -1,0 +1,30 @@
+{
+    "languages": [
+        {
+            "film" : "Movie",
+            "serieTv": "TvSeries",
+            "catalogo": "Catalog",
+            "home": "FILM & TVSERIES",
+            "ricerca": "Search...",
+            "piuPopolari": "Most Popular",
+            "menoPopolari": "Less Popular",
+            "meglioVotati": "Better Voted",
+            "peggioVotati": "Worst Rated",
+            "predefinito": "Default",
+            "filtro": "Sort by:"
+        },
+        {
+            "film" : "Film",
+            "serieTv": "Serie",
+            "catalogo": "Catalogo",
+            "home": "FILM E SERIE",
+            "ricerca": "Cerca...",
+            "piuPopolari": "Più Popolari",
+            "menoPopolari": "Meno Popolari",
+            "meglioVotati": "Meglio Votati",
+            "peggioVotati": "Peggio Votati",
+            "predefinito": "Predefinito",
+            "filtro": "Ordina per:"
+        }
+    ]
+}
