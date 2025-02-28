@@ -1,8 +1,8 @@
 <template>
-    <div class="homeContainer">
+
         <h1 id="homeTitolo">{{lingua.home}}</h1>
         <ImgFilmSerie/>
-    </div>
+
 </template>
 <script>
 import ImgCube from '../components/imgCube.vue';
@@ -32,8 +32,26 @@ export default {
 console.log(dataStore)
 </script>
 <style>
-.homeContainer{
-    margin-top:7%;
+#homeTitolo{
+    position:relative;
+    top:5%;
+}
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 90% !important; /* Occupa quasi tutta la larghezza dello schermo */
+  }
+}
+
+@media (max-width: 480px) {
+  .swiper-slide {
+    width: 100% !important;
+    
+  }
+  ImgFilmSerie{
+    position:relative;
+    top:100%;
+    
+  }
 }
 </style>
 

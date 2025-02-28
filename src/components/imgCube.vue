@@ -78,6 +78,7 @@ export default {
 #swiperCube{
     width: 300px;
     height: auto; 
+
 }
 #swiperSlideCube{
 

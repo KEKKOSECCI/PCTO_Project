@@ -1,23 +1,23 @@
 <template>
     <div id="all">
-        <swiper :loop="true" :effect="'coverflow'" :spaceBetween="30" :grabCursor="true" :centeredSlides="true" :slidesPerView="'auto'" :coverflowEffect="{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-        }" :pagination="false" :modules="modules" 
-        class="mySwiper">
-        <swiper-slide v-for="(element,index) in array" :key="index" >
-            <CardCarousel :oggetto="element"/>
-        </swiper-slide>
+        <swiper :loop="true" :effect="'coverflow'" :spaceBetween="30" :grabCursor="true" :centeredSlides="true"
+            :slidesPerView="'auto'" :coverflowEffect="{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            }" :pagination="false" :modules="modules" class="mySwiper">
+            <swiper-slide v-for="(element, index) in array" :key="index">
+                <CardCarousel :oggetto="element" />
+            </swiper-slide>
         </swiper>
     </div>
 </template>
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import {dataStore} from '../data/data';
+import { dataStore } from '../data/data';
 
 
 // Import Swiper styles
@@ -28,7 +28,7 @@ import 'swiper/css/pagination';
 
 
 // import required modules
-import {Autoplay, EffectCoverflow, Pagination , Navigation } from 'swiper/modules';
+import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import CardCarousel from './cardCarousel.vue';
 import AppLink from './AppLink.vue';
 
@@ -41,25 +41,25 @@ export default {
     },
     setup() {
         return {
-            modules: [EffectCoverflow, Pagination , Autoplay , Navigation],
+            modules: [EffectCoverflow, Pagination, Autoplay, Navigation],
             dataStore
         };
     },
-    computed:{
-        array(){
-            return this.bestPopularityFilm.concat(this.bestPopularitySerie) 
+    computed: {
+        array() {
+            return this.bestPopularityFilm.concat(this.bestPopularitySerie)
         },
-        srce(element){
+        srce(element) {
             return `https://image.tmdb.org/t/p/original${element.backdrop_path}`
         }
         ,
-        bestPopularityFilm(){
+        bestPopularityFilm() {
             let sort = dataStore.dataFilm.sort((a, b) => b.popularity - a.popularity)
-            return sort.slice(0,5)
+            return sort.slice(0, 5)
         },
-        bestPopularitySerie(){
+        bestPopularitySerie() {
             let sort = dataStore.dataSerie.sort((a, b) => b.popularity - a.popularity)
-            return sort.slice(0,5)
+            return sort.slice(0, 5)
         },
     }
 };
@@ -76,15 +76,30 @@ export default {
     background-size: cover;
     width: 700px;
     height: auto;
-    border-radius:20px;
+    border-radius: 20px;
 }
 
 .swiper-slide img {
     display: block;
     width: 100%;
 }
-#all{
-    margin:0px;
-    margin-top:2%;
+
+#all {
+    position:relative;
+    top:10%;
+}
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 90% !important; /* Occupa quasi tutta la larghezza dello schermo */
+  }
+}
+
+@media (max-width: 480px) {
+  .swiper-slide {
+    width: 100% !important;
+  }
+  #all{
+    top:40% !important;
+  }
 }
 </style>
