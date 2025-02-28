@@ -46,7 +46,7 @@ export default {
 
 <style>
 #immagine {
-  width: 250px;
+  width: 100%;
 }
 
 #titolo {
@@ -55,7 +55,7 @@ export default {
 }
 @media (max-width: 480px) {
   #immagine{
-    width:100%;
+    width:120px;
     border-radius: 10px !important;
   }
   .carte{

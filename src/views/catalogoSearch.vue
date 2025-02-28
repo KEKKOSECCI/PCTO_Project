@@ -198,11 +198,9 @@ export default {
 }
 @media (max-width: 480px) {
   .box{
-    margin-left:0;
-    grid-template-columns: repeat(3, 0fr);
-    width:99%;
     margin-left:auto;
-
+    grid-template-columns: repeat(3);
+    width:99%;
     margin-top:30%;
     align-items: center;
     overflow:hidden;
